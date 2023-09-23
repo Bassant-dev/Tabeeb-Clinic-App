@@ -5,7 +5,7 @@ class DioHelper {
   static late Dio dio;
   static Init_dio() {
     dio = Dio(BaseOptions(
-      baseUrl: 'https://tasksapp.integration25.com/api',
+      baseUrl: 'https://vcare.integration25.com/api/',
       receiveDataWhenStatusError: true,
     ));
   }

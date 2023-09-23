@@ -3,39 +3,45 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import '../../../../core/cache_helper.dart';
+import '../../../../core/component.dart';
+import '../../../home_screen/view/home_screen.dart';
+import '../../view_model/cubit/cubit.dart';
+import '../../view_model/cubit/states.dart';
 
-import '../../../core/cache_helper.dart';
-import '../../../core/component.dart';
-import '../view_model/cubit/cubit.dart';
-import '../view_model/cubit/states.dart';
-
-
-class RegisterScreenBody extends StatelessWidget {
+class RegisterScreenBody extends StatefulWidget {
   RegisterScreenBody({Key? key}) : super(key: key);
 
+  @override
+  _RegisterScreenBodyState createState() => _RegisterScreenBodyState();
+}
+
+class _RegisterScreenBodyState extends State<RegisterScreenBody> {
   bool isvisible = false;
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var nameController = TextEditingController();
   var confirmPasswordController = TextEditingController();
   var phoneController = TextEditingController();
-
-
   var formKey = GlobalKey<FormState>();
+  String selectedGender = '1';
+
   Future<void> storeTokenInSharedPreferences(String token) async {
     CacheHelper.saveData(key: "token", value: token);
   }
 
   @override
   Widget build(BuildContext context) {
-
-    print(CacheHelper.getData(key: "token"));
     return BlocConsumer<RegisterCubit, RegisterStates>(
-      listener: (context, state) async {
-
-        if (state is RegisterSuccessState) {
+      listener: (BuildContext context, RegisterStates state) {
+        if(state is RegisterSuccessState){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+          );
 
         }
+
       },
 
       builder: (context, state) {
@@ -48,12 +54,13 @@ class RegisterScreenBody extends StatelessWidget {
                 key: formKey,
                 child: Column(
                   children: [
-                    Text('Let’s get started!',
-                        style: GoogleFonts.roboto(fontSize: 24, fontWeight: FontWeight.bold)
+                    Text(
+                      'Let’s get started!',
+                      style: GoogleFonts.roboto(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 20.h),
                     Text(
-                      'create an account and start booking now.',
+                      'Create an account and start booking now.',
                       style: GoogleFonts.roboto(
                         fontSize: 16.sp,
                         color: HexColor('#7C808A'),
@@ -111,7 +118,7 @@ class RegisterScreenBody extends StatelessWidget {
                     ),
                     SizedBox(height: 20.h),
                     defaultFormField(
-                      controller: passwordController,
+                      controller: confirmPasswordController,
                       type: TextInputType.visiblePassword,
                       validate: (String? value) {
                         if (value!.isEmpty) {
@@ -119,16 +126,64 @@ class RegisterScreenBody extends StatelessWidget {
                         }
                         return null;
                       },
-                      label: 'confirm Password',
+                      label: 'Confirm Password',
                     ),
                     SizedBox(height: 20.h),
 
+                    // Radio buttons for gender selection
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Radio(
+                              value: '0', // Male
+                              groupValue: selectedGender,
+                              onChanged: (value) {
+                                setState(() {
+                                  selectedGender = value.toString();
+                                });
+                              },
+                            ),
+                            Text('Male'),
+                            Radio(
+                              value: '1', // Female
+                              groupValue: selectedGender,
+                              onChanged: (value) {
+                                setState(() {
+                                  selectedGender = value.toString();
+                                });
+                              },
+                            ),
+                            Text('Female'),
+                          ],
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(height: 20.h),
+                    Row(
+                      children: [
+                        Text('Already have an account? Login here', style: TextStyle(fontSize: 16)),
+                        SizedBox(height: 5,),
+                       // TextButton('Login here', onPressed: (){}, child: ,)
+
+
+                      ],
+                    ),
+
                     ElevatedButton(
                       onPressed: () {
-
                         if (formKey.currentState!.validate()) {
                           isvisible = true;
-
+                          RegisterCubit.get(context).addRegister(
+                            name: nameController.text,
+                            email: emailController.text,
+                            phone: phoneController.text,
+                            gender: selectedGender, // Pass the selected gender
+                            password: passwordController.text,
+                            ConfirmPassword: confirmPasswordController.text,
+                          );
                         }
                       },
                       style: ElevatedButton.styleFrom(
