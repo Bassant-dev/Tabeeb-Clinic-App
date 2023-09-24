@@ -1,0 +1,10 @@
+class ApiConst{
+
+  static const  String BASEURL = 'https://vcare.integration25.com/api';
+  static const  String  SIGNUP = '/auth/register';
+
+  static const  String  SIGNIN = '/auth/login';
+
+
+}
+
