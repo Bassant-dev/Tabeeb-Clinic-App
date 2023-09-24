@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class ViewAllScreen extends StatelessWidget {
   const ViewAllScreen({Key? key}) : super(key: key);
@@ -8,6 +9,7 @@ class ViewAllScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('View All Doctors'),
+        backgroundColor: HexColor('#174068'),
       ),
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -52,15 +54,20 @@ class DoctorCard extends StatelessWidget {
   });
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 4.0, // Add elevation for a raised look
+      elevation: 4.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0), // Add rounded corners
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: Container(
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
                 image: DecorationImage(
                   image: NetworkImage(imageUrl),
                   fit: BoxFit.cover,
@@ -68,22 +75,24 @@ class DoctorCard extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(height: 8.0), // Add spacing
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
               doctorName,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'YourCustomFont'),
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
               specialty,
-              style: TextStyle(fontSize: 14, color: Colors.grey),
+              style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
           ),
+          SizedBox(height: 8.0), // Add spacing
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
               description,
               style: TextStyle(fontSize: 14),
@@ -91,22 +100,55 @@ class DoctorCard extends StatelessWidget {
               maxLines: 2,
             ),
           ),
+          SizedBox(height: 8.0), // Add spacing
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
               grade,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.green),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue), // Customize color
             ),
           ),
+          SizedBox(height: 8.0), // Add spacing
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
             child: ElevatedButton(
               onPressed: () {
                 // Add your action here when the card is tapped
               },
-              child: Text('View Profile'),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(HexColor('#174068')),
+                overlayColor: MaterialStateProperty.all<Color>(HexColor('#0D2D4E')), // Color when the button is pressed
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0), // Custom shape with rounded corners
+                    side: BorderSide(color: Colors.white, width: 2.0), // Add a white border
+                  ),
+                ),
+              ),
+              child: Container(
+                width: 130.0,
+                height: 50.0,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      HexColor('#174068'),
+                      HexColor('#0D2D4E'),
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                  borderRadius: BorderRadius.circular(20.0), // Match the button shape
+                ),
+                child: Text(
+                  'View Profile',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ),
           ),
+          SizedBox(height: 8.0), // Add spacing
         ],
       ),
     );
