@@ -6,6 +6,7 @@ import 'package:v_care_clinic/screens/home_screen/view/widget/view_all_doctors_h
 import 'package:v_care_clinic/screens/home_screen/view_model/cubit/cubit.dart';
 import 'package:v_care_clinic/screens/home_screen/view_model/cubit/states.dart';
 
+import '../../../ProfileScreen/view/screens/UserProfileScreen.dart';
 import '../../../doctor_details/view model/doctor_details_cubit.dart';
 import '../../../doctor_details/views/doctor details view.dart';
 
@@ -40,7 +41,14 @@ class HomeScreenBody extends StatelessWidget {
                 IconButton(icon: Icon(Icons.home, color: Colors.blueAccent,), onPressed: () {},),
                 IconButton(icon: Icon(Icons.add, color: Colors.blueAccent,), onPressed: () {},),
                 IconButton(icon: Icon(Icons.history, color: Colors.blueAccent,), onPressed: () {},),
-                IconButton(icon: Icon(Icons.account_box, color: Colors.blueAccent,), onPressed: () {},),
+                IconButton(icon: Icon(Icons.account_box, color: Colors.blueAccent,), onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) =>  UserProfileScreen(),
+                    ),
+                  );
+
+                },),
               ],
             ),
           ),

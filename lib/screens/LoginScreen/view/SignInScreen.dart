@@ -10,6 +10,9 @@ import 'package:v_care_clinic/screens/LoginScreen/viewmodel/SignIncubit/SignInSt
 import 'package:v_care_clinic/screens/LoginScreen/viewmodel/SignIncubit/SigninCubit.dart';
 import 'package:v_care_clinic/screens/ProfileScreen/view/screens/UserProfileScreen.dart';
 
+import '../../../core/cache_helper.dart';
+import '../../home_screen/view/home_screen.dart';
+
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
   final _formKey = GlobalKey<FormState>();
@@ -36,12 +39,17 @@ class SignInScreen extends StatelessWidget {
           navto(context,UserProfileScreen());
 
           print( state.signinmodel.message);
-
-
-          Fluttertoast.showToast(
-            msg: "Successfully sign in",
-            backgroundColor: Colors.green,
+print(CacheHelper.getData(key: "token"));
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
           );
+          // Fluttertoast.showToast(
+          //   msg: "Successfully sign in",
+          //   backgroundColor: Colors.green,
+          // );
+
+
 
         }
       },

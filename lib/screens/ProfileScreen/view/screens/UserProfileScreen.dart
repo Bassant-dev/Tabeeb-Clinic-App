@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:v_care_clinic/core/Colors.dart';
 
 class UserProfileScreen extends StatelessWidget {
-  const UserProfileScreen({super.key});
+  UserProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

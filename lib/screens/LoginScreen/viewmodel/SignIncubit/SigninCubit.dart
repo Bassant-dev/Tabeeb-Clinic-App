@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:v_care_clinic/core/Api.dart';
+import 'package:v_care_clinic/core/cache_helper.dart';
 import 'package:v_care_clinic/core/dio_helper.dart';
 import 'package:v_care_clinic/screens/LoginScreen/models/SignUPModel/SignUpModel.dart';
 import 'package:v_care_clinic/screens/LoginScreen/viewmodel/SignIncubit/SignInStates.dart';
@@ -31,6 +32,7 @@ class SignInCubit extends Cubit<SignInStates> {
 
     DioHelper.postData(
       url: ApiConst.SIGNIN,
+      token: "token",
       data: {
         'email': email,
         'password':password,
@@ -41,6 +43,7 @@ class SignInCubit extends Cubit<SignInStates> {
       print("in sign  in sucessssssss");
 
       print(response.data);
+      CacheHelper.saveData(key:"token", value:response.data['data']['token']);
 
       emit(SignInSuccessState(signinModel!));
     }).catchError((error){

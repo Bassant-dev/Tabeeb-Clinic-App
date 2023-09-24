@@ -2,6 +2,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 
+import '../LoginScreen/view/SignInScreen.dart';
 import '../register_screen/view/widget/register_screen_body.dart';
 
 class MyHome extends StatefulWidget {
@@ -120,7 +121,13 @@ class _MyHomeState extends State<MyHome> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      OutlinedButton(onPressed: (){}, child: Text(
+                      OutlinedButton(onPressed: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>   SignInScreen()),
+                        );
+                      }
+                        , child: Text(
                           "Login",
                         style: TextStyle(
                           fontSize: 21,
