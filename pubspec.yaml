@@ -48,7 +48,7 @@ dependencies:
   fluttertoast: ^8.2.2
   syncfusion_flutter_datepicker: ^23.1.36
   calendar_date_picker2: ^0.5.3
-  intl: ^0.18.1
+  dots_indicator: ^2.1.1
 
 
 
