@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:v_care_clinic/screens/home_screen/view/widget/view_all_doctors_home.dart';
 import 'package:v_care_clinic/screens/home_screen/view_model/cubit/cubit.dart';
 import 'package:v_care_clinic/screens/home_screen/view_model/cubit/states.dart';
+
+import '../../../doctor_details/view model/doctor_details_cubit.dart';
+import '../../../doctor_details/views/doctor details view.dart';
 
 class HomeScreenBody extends StatelessWidget {
   HomeScreenBody({Key? key}) : super(key: key);
@@ -62,7 +66,21 @@ class HomeScreenBody extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 5,),
-                      Text('View all', style: TextStyle(fontSize: 14.sp, ))
+                      GestureDetector(
+                        onTap: () {
+                          print( sectionData?.id ?? '',);
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => ViewAllScreen(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'View all',
+                          style: TextStyle(fontSize: 14.sp),
+                        ),
+                      )
+
                     ],
                   ),
                   sectionData != null ? SizedBox(
@@ -117,11 +135,20 @@ class HomeScreenBody extends StatelessWidget {
                                   child: Row(
                                     children: [
                                       Text(
+
                                         doctor.description!,
                                         style: TextStyle(fontSize: 14),
                                       ),
                                       IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          print(doctor.id!);
+                                          BlocProvider.of<DoctorDetailsCubit>(context).showDetails(doctor.id!);
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>   DoctorDetailsView( id: doctor.id!,),
+                                            ),
+                                          );
+                                        },
                                         icon: Icon(Icons.arrow_right_alt, color: HexColor('#174068')),
                                       ),
                                     ],

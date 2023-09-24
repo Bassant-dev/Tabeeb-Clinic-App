@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
-import 'package:vcareapp/core/appcolors/colors.dart';
-import 'package:vcareapp/features/doctor_details/view%20model/doctor_details_cubit.dart';
+import 'package:v_care_clinic/screens/doctor_details/views/widgets/customTimeItem.dart';
 
-import '../../../core/appfont/styles.dart';
+import '../../../core/appcolors.dart';
+import '../../../core/appfont.dart';
+import '../view model/doctor_details_cubit.dart';
 
 class DoctorDetailsView extends StatelessWidget {
-  const DoctorDetailsView({Key? key}) : super(key: key);
-
+ DoctorDetailsView({Key? key,required this.id}) : super(key: key);
+int id;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,7 +139,8 @@ class DoctorDetailsView extends StatelessWidget {
                       height: 36.h,
                       child: ElevatedButton(
                           onPressed: () {
-                            cubit.showDetails();
+
+                            cubit.showDetails(id);
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.primaryColor),

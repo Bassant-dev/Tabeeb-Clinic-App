@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:v_care_clinic/screens/doctor_details/view%20model/doctor_details_cubit.dart';
 
 import 'package:v_care_clinic/screens/home_screen/view/widget/home_screen_body.dart';
 import 'package:v_care_clinic/screens/home_screen/view_model/cubit/cubit.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(create: (context)=> RegisterCubit()),
             BlocProvider(create: (context)=> HomeCubit()..getAllDoctor()),
+            BlocProvider(create: (context)=> DoctorDetailsCubit()),
 
           ],
       child: ScreenUtilInit(

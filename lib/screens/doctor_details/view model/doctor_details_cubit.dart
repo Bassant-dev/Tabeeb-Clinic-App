@@ -3,7 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
-import 'package:vcareapp/core/diohelper/dio.dart';
+
+import '../../../core/dio_helper.dart';
 import '../model/doctor details model.dart';
 part 'doctor_details_state.dart';
 
@@ -20,16 +21,15 @@ class DoctorDetailsCubit extends Cubit<DoctorDetailsState> {
     print(formattedDate);
     emit(DateTimeChangedSuccess());
   }
- Future showDetails()async// put doctorId here
+ Future showDetails( int ? doctorId)async// put doctorId here
   {
-   if(dateTimeController.text.isNotEmpty)
-     {
-       dateTimeController.clear();
-     }
+
+   emit(DoctorDetailsLoading());
    try {
-      int x=3;
+
       Response response=await DioHelper.getData(
-        endPoint: '/doctor/show/$x',
+       url: 'doctor/show/$doctorId',
+        token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3ZjYXJlLmludGVncmF0aW9uMjUuY29tL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNjk1NTU0NDMyLCJleHAiOjE2OTU1NTgwMzIsIm5iZiI6MTY5NTU1NDQzMiwianRpIjoiNlZhcU5wUzNHbGtkM3ZJZyIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.C8UbCTZ4ZA4ME_AFoF_8lqFZ4OFJs9S0vUzslmVRMM0"
       );
 model=DoctorDetailsModel.fromJson(response.data);
      print(DoctorDetailsModel.fromJson(response.data));
