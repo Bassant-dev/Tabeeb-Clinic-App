@@ -7,6 +7,7 @@ import 'package:v_care_clinic/screens/home_screen/view/widget/home_screen_body.d
 import 'package:v_care_clinic/screens/home_screen/view_model/cubit/cubit.dart';
 import 'package:v_care_clinic/screens/register_screen/view/register_screen.dart';
 import 'package:v_care_clinic/screens/register_screen/view_model/cubit/cubit.dart';
+import 'package:v_care_clinic/screens/splash_screen/splash_screen.dart';
 
 import 'core/bloc_observer.dart';
 import 'core/cache_helper.dart';
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
 
             useMaterial3: false ,
           ),
-          home:HomeScreenBody(),
+          home:MyHomePage(),
         ),
       ),
     );
