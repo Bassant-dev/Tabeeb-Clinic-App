@@ -46,7 +46,9 @@ class _RegisterScreenBodyState extends State<RegisterScreenBody> {
 
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            backgroundColor: HexColor("#174068"),
+          ),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 48),
@@ -75,6 +77,9 @@ class _RegisterScreenBodyState extends State<RegisterScreenBody> {
                         if (value!.isEmpty) {
                           return 'Please enter your name';
                         }
+                        else if(nameController.text.length<3){
+                          return 'name must be more than 3 characters';
+                        }
                         return null;
                       },
                       label: 'Name',
@@ -86,6 +91,9 @@ class _RegisterScreenBodyState extends State<RegisterScreenBody> {
                       validate: (String? value) {
                         if (value!.isEmpty) {
                           return 'Please enter your email';
+                        }
+                        else if(!value.contains('@')){
+                          return 'Please enter your valid email';
                         }
                         return null;
                       },
@@ -99,13 +107,17 @@ class _RegisterScreenBodyState extends State<RegisterScreenBody> {
                         if (value!.isEmpty) {
                           return 'Please enter your phone';
                         }
-                        return null;
+                        else if(value.length<11){
+                          return 'Please enter your valid phone number';
+                        }
+
                       },
                       label: 'Phone',
                     ),
 
                     SizedBox(height: 20.h),
                     defaultFormField(
+
                       controller: passwordController,
                       type: TextInputType.visiblePassword,
                       validate: (String? value) {
@@ -122,8 +134,12 @@ class _RegisterScreenBodyState extends State<RegisterScreenBody> {
                       type: TextInputType.visiblePassword,
                       validate: (String? value) {
                         if (value!.isEmpty) {
-                          return 'Please enter your confirm password';
+                          return 'Please enter your password again';
                         }
+                        else if(passwordController.text!=confirmPasswordController.text){
+                          return 'confirm password doesn\'t match password';
+                        }
+
                         return null;
                       },
                       label: 'Confirm Password',
@@ -171,7 +187,7 @@ class _RegisterScreenBodyState extends State<RegisterScreenBody> {
 
                       ],
                     ),
-
+SizedBox(height: 10,),
                     ElevatedButton(
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
@@ -185,6 +201,7 @@ class _RegisterScreenBodyState extends State<RegisterScreenBody> {
                             ConfirmPassword: confirmPasswordController.text,
                           );
                         }
+
                       },
                       style: ElevatedButton.styleFrom(
                         primary: HexColor('#174068'),

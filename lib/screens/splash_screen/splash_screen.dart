@@ -2,7 +2,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-import 'onboarding_screen.dart';
+import '../onboarding_screen/onboarding_screen.dart';
+
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -35,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Spacer(flex: 3,),
             Image.asset(
-                'assests/slider5.jpg',
+                'assets/img/slider5.jpg',
             ),
             Text(
               'Tabeeb',

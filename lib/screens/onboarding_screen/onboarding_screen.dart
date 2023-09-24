@@ -1,5 +1,8 @@
+
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+
+import '../register_screen/view/widget/register_screen_body.dart';
 
 class MyHome extends StatefulWidget {
   @override
@@ -30,7 +33,7 @@ class _MyHomeState extends State<MyHome> {
             children: [
               OnboardingScreen(
                   Image.asset(
-                      'assests/slider4.jpg',
+                      'assets/img/slider4.jpg',
                   ),
                   [
                      Text("Discover a world of healthcare options at your fingertips\n\nFind the perfect doctor for your needs with just a few taps\n",
@@ -66,7 +69,7 @@ class _MyHomeState extends State<MyHome> {
               ),
               OnboardingScreen(
                   Image.asset(
-                      'assests/slider3.jpg'
+                      'assets/img/slider3.jpg'
                   ),
                   [
                      Text("Access a wide range of specialists and medical professionals Caring About Your Health\n\nEnjoy the convenience of online consultations from your home.",
@@ -101,7 +104,7 @@ class _MyHomeState extends State<MyHome> {
 
               ),
               OnboardingScreen(
-                Image.asset('assests/slider2.png'),
+                Image.asset('assets/img/slider2.png'),
                 [
                    Text("Take control of your healthcare journey with our intuitive app\n\nReserve Your Doctor Now!", style: TextStyle(
                       fontSize: 22,
@@ -130,7 +133,13 @@ class _MyHomeState extends State<MyHome> {
                           shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0))),
 
                         ),),
-                      OutlinedButton(onPressed: (){}, child: Text(
+                      OutlinedButton(onPressed: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>  RegisterScreenBody()),
+                        );
+
+                      }, child: Text(
                           "Sign up",
                         style: TextStyle(
                           fontSize: 21,
