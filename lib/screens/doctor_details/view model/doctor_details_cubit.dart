@@ -1,11 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
-
-import '../../../core/dio_helper.dart';
+import 'package:vcareapp/core/cacheHelper/cacheHelper.dart';
+import 'package:vcareapp/core/diohelper/dio.dart';
 import '../model/doctor details model.dart';
+import '../views/booking_success_view.dart';
 part 'doctor_details_state.dart';
 
 class DoctorDetailsCubit extends Cubit<DoctorDetailsState> {
@@ -21,15 +23,16 @@ class DoctorDetailsCubit extends Cubit<DoctorDetailsState> {
     print(formattedDate);
     emit(DateTimeChangedSuccess());
   }
- Future showDetails( int ? doctorId)async// put doctorId here
+ Future showDetails()async// put doctorId here
   {
-
-   emit(DoctorDetailsLoading());
+   if(dateTimeController.text.isNotEmpty)
+     {
+       dateTimeController.clear();
+     }
    try {
-
+      int x=3;
       Response response=await DioHelper.getData(
-       url: 'doctor/show/$doctorId',
-        token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3ZjYXJlLmludGVncmF0aW9uMjUuY29tL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNjk1NTU0NDMyLCJleHAiOjE2OTU1NTgwMzIsIm5iZiI6MTY5NTU1NDQzMiwianRpIjoiNlZhcU5wUzNHbGtkM3ZJZyIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.C8UbCTZ4ZA4ME_AFoF_8lqFZ4OFJs9S0vUzslmVRMM0"
+        endPoint: '/doctor/show/$x',
       );
 model=DoctorDetailsModel.fromJson(response.data);
      print(DoctorDetailsModel.fromJson(response.data));
@@ -51,21 +54,52 @@ model=DoctorDetailsModel.fromJson(response.data);
   getTime()
   {
     time=[];
-    String date="";
+   // String date="";
       for(int x=int.parse(model!.doctorDataModel.start_time.substring(0,2));
       x<=int.parse(model!.doctorDataModel.end_time.substring(0,2));x++)
         {
 
-          if(x>12 && x<24){
-            date="PM";
-          }else{
-            date="AM";
-          }
-          time.add("$x $date");
+          // if(x>12 && x<24){
+          //   date="PM";
+          // }else{
+          //   date="AM";
+          // }
+          time.add("$x:00");
           //timeChecked.add(false);
         }
 
       print(time.length);
+  }
+  bookAppointment(String time,context)async
+  {
+   try {
+     Response response= await DioHelper.postData(data: {
+        'doctor_id':'3',
+        'start_time':'${dateTimeController.text} $time'
+      },
+          endPoint: '/appointment/store',
+      );
+     print(response.data['message']);
+     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${response.data['message']}')));
+     Navigator.push(
+       context,
+       MaterialPageRoute(
+           builder: (context) =>
+               const BookingSuccessView()),
+
+     );
+     dateTimeController.clear();
+     emit(BookedSuccessfully());
+   } on Exception catch (e) {
+     if(e is DioException )
+       {
+         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${e.response?.data['data']['start_time'][0]}')));
+         print(e.response?.data['data']['start_time'][0]);
+       }
+     emit(BookedFailed());
+
+   }
+
   }
 
 int currentIndex=0;
