@@ -20,9 +20,11 @@ class DoctorDataModel {
   final String description;
   final String start_time;
   final String end_time;
+  final String appoint_price;
 
   DoctorDataModel(
       {required this.id,
+        required this.appoint_price,
         required this.start_time,
         required this.end_time,
       required this.name,
@@ -32,6 +34,7 @@ class DoctorDataModel {
       required this.description});
   factory DoctorDataModel.fromJson(Map<String, dynamic> json) {
     return DoctorDataModel(end_time: json['end_time'],
+      appoint_price: json['appoint_price'],
       start_time: json['start_time'],
       id: json['id'],
       name: json['name'],
