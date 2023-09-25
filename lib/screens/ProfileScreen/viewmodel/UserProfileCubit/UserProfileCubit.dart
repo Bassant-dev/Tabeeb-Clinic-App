@@ -78,11 +78,9 @@ class UserProfileCubit extends Cubit<UserProfileStates> {
 
     )
         .then((response) {
-print("responseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
       print(response.data);
 print(response.data['message']);
 
-      print(response.data['data'][1]);
       for (var item in response.data['data'] ){
         try {
           print(item);
@@ -92,10 +90,10 @@ print(response.data['message']);
           appointments.add(AppointmentData.fromJson(item));
         }
       }
-      print(appointments[0]);
+     /* print(appointments[0]);
       print(appointments[0].doctor);
       print(appointments[0].appointmentPrice);
-      print(appointments[0].id);
+      print(appointments[0].id);*/
 
       print("in user profile appointments  sucessssssss");
 
