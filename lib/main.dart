@@ -31,7 +31,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
           providers: [
             BlocProvider(create: (context)=> RegisterCubit()),
-            BlocProvider(create: (context)=> HomeCubit()..getAllDoctor()),
+            BlocProvider(create: (context)=> HomeCubit()..getAllDoctorSpec()..getAllCity()..getAllGovernment()..getAllSpecializatio()),
+           // BlocProvider(create: (context)=> HomeCubit()..getAllDoctor(),),
             BlocProvider(create: (context)=> DoctorDetailsCubit()),
             BlocProvider(create: (context)=>  SignInCubit()),
 

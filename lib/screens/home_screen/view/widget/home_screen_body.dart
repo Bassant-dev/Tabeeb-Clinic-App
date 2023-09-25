@@ -1,18 +1,183 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:v_care_clinic/screens/home_screen/view/widget/view_all_doctors_home.dart';
-import 'package:v_care_clinic/screens/home_screen/view_model/cubit/cubit.dart';
-import 'package:v_care_clinic/screens/home_screen/view_model/cubit/states.dart';
 
 import '../../../ProfileScreen/view/screens/UserProfileScreen.dart';
 import '../../../doctor_details/view model/doctor_details_cubit.dart';
 import '../../../doctor_details/views/doctor details view.dart';
+import '../../view_model/cubit/cubit.dart';
+import '../../view_model/cubit/states.dart';
 
 
 class HomeScreenBody extends StatelessWidget {
   HomeScreenBody({Key? key}) : super(key: key);
+  void _showFilterBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        var cubit = HomeCubit.get(context);
+        return ClipRRect(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(Icons.filter_list_outlined),
+                    SizedBox(width: 3),
+                    TextButton(
+                      onPressed: () {
+                        _showFilterBottomSheet(context);
+                      },
+                      child: Text(
+                        'Filter',
+                        style: TextStyle(fontSize: 14.sp, color: HexColor('#174068')),
+                      ),
+                    ),
+
+
+                  ],
+                ),
+                SizedBox(
+                  height: 6,
+                ),
+                Card(
+                  child: ExpansionTile(
+                    title: Text("CITY"),
+                    children: [
+                      StatefulBuilder(
+                          builder: (BuildContext context, StateSetter setState /*You can rename this!*/){
+                            return  Container(
+                              height: 200, // Adjust the height as needed
+                              child: ListView.builder(
+                                itemCount: cubit.cityModel != null ? cubit.cityModel!.data!.length : 0,
+                                itemBuilder: (context, index) {
+                                  final Data = cubit.cityModel?.data?[index];
+                                  return RadioListTile(
+                                    title: Text("${Data!.name}"),
+                                    value: index+1,
+                                    groupValue: cubit.selectItem,
+                                    onChanged: (value) {
+                                      print(value);
+                                      print("m + b");
+                                      setState(() {
+                                        HomeCubit.get(context).selectItem=value;
+                                      });
+                                      // HomeCubit.get(context).selectOption(value!);
+                                    },
+
+                                  );
+                                },
+                              ),
+                            );
+                          }
+                      ),
+                    ],
+                  ),
+                ),
+                Card(
+                  child: ExpansionTile(
+                    title: Text("GOVERNMENT"),
+                    children: [
+                      StatefulBuilder(
+                          builder: (BuildContext context, StateSetter setState /*You can rename this!*/){
+                            return  Container(
+                              height: 200, // Adjust the height as needed
+                              child: ListView.builder(
+                                itemCount: cubit.governmentModel != null ? cubit.governmentModel!.data!.length : 0,
+                                itemBuilder: (context, index) {
+                                  final Data = cubit.governmentModel?.data?[index];
+                                  return RadioListTile(
+                                    title: Text("${Data!.name}"),
+                                    value: index+1,
+                                    groupValue: cubit.selectItem,
+                                    onChanged: (value) {
+                                      print(value);
+                                      print("m + b");
+                                      setState(() {
+                                        HomeCubit.get(context).selectItem=value;
+                                      });
+                                      // HomeCubit.get(context).selectOption(value!);
+                                    },
+
+                                  );
+                                },
+                              ),
+                            );
+                          }
+                      ),
+                    ],
+                  ),
+                ),
+                Card(
+                  child: ExpansionTile(
+                    title: Text("SPECIALIZATION"),
+                    children: [
+                      StatefulBuilder(
+                          builder: (BuildContext context, StateSetter setState /*You can rename this!*/){
+                            return  Container(
+                              height: 200, // Adjust the height as needed
+                              child: ListView.builder(
+                                itemCount: cubit.specialModel != null ? cubit.specialModel!.data!.length : 0,
+                                itemBuilder: (context, index) {
+                                  final Data = cubit.specialModel?.data?[index];
+                                  return RadioListTile(
+                                    title: Text("${Data!.name}"),
+                                    value: index+1,
+                                    groupValue: cubit.selectItem,
+                                    onChanged: (value) {
+                                      print(value);
+                                      print("m + b");
+                                      setState(() {
+                                        HomeCubit.get(context).selectItem=value;
+                                      });
+                                      // HomeCubit.get(context).selectOption(value!);
+                                    },
+
+                                  );
+                                },
+                              ),
+                            );
+                          }
+                      ),
+                    ],
+                  ),
+                ),
+
+
+                SizedBox(height: 10,),
+                ElevatedButton(
+                  onPressed: () {
+
+
+
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: HexColor('#174068'),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(0),
+                    ),
+                    minimumSize: const Size(312, 48),
+                  ),
+                  child: Text(
+                    'Apply',
+                    style: GoogleFonts.roboto(fontSize: 14.sp, color: Colors.white),
+                  ),
+                ),
+                SizedBox(height: 20,),
+              ],
+            ),
+          ),
+        );
+
+
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +206,12 @@ class HomeScreenBody extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
-                      icon: Icon(Icons.home, color:HexColor('#174068')),
+                      icon: Icon(Icons.home, color: HexColor('#174068')),
                       onPressed: () {},
                     ),
                     Text(
                       'Home',
-                      style: TextStyle(fontSize: 12, color:HexColor('#174068')),
+                      style: TextStyle(fontSize: 12, color: HexColor('#174068')),
                     ),
                   ],
                 ),
@@ -91,7 +256,7 @@ class HomeScreenBody extends StatelessWidget {
                     ),
                     Text(
                       'Account',
-                      style: TextStyle(fontSize: 12, color:HexColor('#174068')),
+                      style: TextStyle(fontSize: 12, color: HexColor('#174068')),
                     ),
                   ],
                 ),
@@ -110,128 +275,154 @@ class HomeScreenBody extends StatelessWidget {
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
-          body: ListView.builder(
-            itemCount: cubit.autogenerated != null ? cubit.autogenerated!.data!.length : 0,
-            itemBuilder: (BuildContext context, int sectionIndex) {
-              final sectionData = cubit.autogenerated?.data?[sectionIndex];
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+          body: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          sectionData?.name ?? '',
-                          style: TextStyle(fontSize: 20.sp, color: Colors.grey),
-                        ),
-                      ),
-                      SizedBox(width: 5,),
-                      GestureDetector(
-                        onTap: () {
-                          print( sectionData?.id ?? '',);
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => ViewAllScreen(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          'View all',
-                          style: TextStyle(fontSize: 14.sp),
-                        ),
-                      )
-                    ],
+                  Icon(Icons.filter_list_outlined),
+                  SizedBox(width: 3),
+                  TextButton(
+                    onPressed: () {
+                      _showFilterBottomSheet(context);
+                    },
+                    child: Text(
+                      'Filter',
+                      style: TextStyle(fontSize: 14.sp, color: HexColor('#174068')),
+                    ),
                   ),
-                  sectionData != null ? SizedBox(
-                    height: 250,
-                    child: ListView.builder(
-                      itemCount: sectionData.doctors?.length ?? 0,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (BuildContext context, int index) {
-                        final doctor = sectionData.doctors![index];
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: 200,
-                            height: 250,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              border: Border.all(
-                                color: Color(0xff174068),
+
+
+                ],
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: cubit.autogenerated != null ? cubit.autogenerated!.data!.length : 0,
+                  itemBuilder: (BuildContext context, int sectionIndex) {
+                    final sectionData = cubit.autogenerated?.data?[sectionIndex];
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text(
+                                sectionData?.name ?? '',
+                                style: TextStyle(fontSize: 20.sp, color: Colors.grey),
                               ),
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  flex: 3,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: NetworkImage(doctor.photo!),
-                                        fit: BoxFit.cover,
-                                      ),
-                                      borderRadius: BorderRadius.circular(12),
+                            SizedBox(width: 5,),
+                            GestureDetector(
+                              onTap: () {
+                                print(sectionData?.id ?? '');
+                                print(sectionData?.name ?? '');
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => ViewAllScreen(id: sectionData?.id ?? 0), // Default to 0 if id is null
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                'View all',
+                                style: TextStyle(fontSize: 14.sp),
+                              ),
+                            )
+                          ],
+                        ),
+                        sectionData != null ? SizedBox(
+                          height: 250,
+                          child: ListView.builder(
+                            itemCount: 3,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (BuildContext context, int index) {
+                              final doctor = sectionData.doctors![index];
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  width: 200,
+                                  height: 250,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(25),
+                                    border: Border.all(
+                                      color: Color(0xff174068),
                                     ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 8, top: 8),
-                                  child: Text(
-                                    doctor.name!,
-                                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 8),
-                                  child: Text(
-                                    doctor.degree!,
-                                    style: TextStyle(fontSize: 14),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 8),
-                                  child: Row(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          doctor.description!,
-                                          style: TextStyle(fontSize: 14),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
+                                        flex: 3,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: NetworkImage(doctor.photo!),
+                                              fit: BoxFit.cover,
+                                            ),
+                                            borderRadius: BorderRadius.circular(12),
+                                          ),
                                         ),
                                       ),
-                                      IconButton(
-                                        onPressed: () {
-                                          print(doctor.id!);
-                                          BlocProvider.of<DoctorDetailsCubit>(context).showDetails(doctor.id!);
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder: (context) =>   DoctorDetailsView( id: doctor.id!,),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8, top: 8),
+                                        child: Text(
+                                          doctor.name!,
+                                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8),
+                                        child: Text(
+                                          doctor.degree!,
+                                          style: TextStyle(fontSize: 14),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                doctor.description!,
+                                                style: TextStyle(fontSize: 14),
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 2,
+                                              ),
                                             ),
-                                          );
-                                        },
-                                        icon: Icon(Icons.arrow_right_alt, color: HexColor('#174068')),
+                                            IconButton(
+                                              onPressed: () {
+                                                print(doctor.id!);
+                                                BlocProvider.of<DoctorDetailsCubit>(context).showDetails(doctor.id!);
+                                                Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                    builder: (context) => DoctorDetailsView(id: doctor.id!),
+                                                  ),
+                                                );
+                                              },
+                                              icon: Icon(Icons.arrow_right_alt, color: HexColor('#174068')),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ],
-                            ),
+                              );
+                            },
                           ),
-                        );
-                      },
-                    ),
-                  ) : SizedBox(),
-                ],
-              );
-            },
+                        ) : SizedBox(),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
+
         );
       },
     );
