@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:v_care_clinic/screens/LoginScreen/viewmodel/SignIncubit/SigninCubit.dart';
+import 'package:v_care_clinic/screens/ProfileScreen/viewmodel/UserProfileCubit/UserProfileCubit.dart';
 import 'package:v_care_clinic/screens/doctor_details/view%20model/doctor_details_cubit.dart';
 
 import 'package:v_care_clinic/screens/home_screen/view/widget/home_screen_body.dart';
@@ -34,6 +35,11 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context)=> HomeCubit()..getAllDoctor()),
             BlocProvider(create: (context)=> DoctorDetailsCubit()),
             BlocProvider(create: (context)=>  SignInCubit()),
+          //  BlocProvider(create: (context)=>  UserProfileCubit()..GetUserData()..GetAppointments()
+            BlocProvider(create: (context)=>  UserProfileCubit()..GetUserData()..GetAppointments(),
+
+
+            ),
 
 
 

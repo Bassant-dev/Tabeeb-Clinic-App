@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:v_care_clinic/screens/ProfileScreen/viewmodel/UserProfileCubit/UserProfileCubit.dart';
 import 'package:v_care_clinic/screens/home_screen/view/widget/view_all_doctors_home.dart';
 import 'package:v_care_clinic/screens/home_screen/view_model/cubit/cubit.dart';
 import 'package:v_care_clinic/screens/home_screen/view_model/cubit/states.dart';
@@ -42,6 +43,9 @@ class HomeScreenBody extends StatelessWidget {
                 IconButton(icon: Icon(Icons.add, color: Colors.blueAccent,), onPressed: () {},),
                 IconButton(icon: Icon(Icons.history, color: Colors.blueAccent,), onPressed: () {},),
                 IconButton(icon: Icon(Icons.account_box, color: Colors.blueAccent,), onPressed: () {
+
+               //   UserProfileCubit.get(context).GetUserData();
+                 // UserProfileCubit.get(context).GetAppointments();
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) =>  UserProfileScreen(),

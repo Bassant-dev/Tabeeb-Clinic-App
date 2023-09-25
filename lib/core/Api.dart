@@ -5,6 +5,9 @@ class ApiConst{
 
   static const  String  SIGNIN = '/auth/login';
 
+  static const  String  USERPROFILE = '/user/profile/';
+  static const  String  USERAPPOINTMENTS = '/appointment/index';
+
 
 }
 
