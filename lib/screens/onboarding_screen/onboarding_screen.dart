@@ -37,7 +37,8 @@ class _MyHomeState extends State<MyHome> {
                       'assets/img/slider4.jpg',
                   ),
                   [
-                     Text("Discover a world of healthcare options at your fingertips\n\nFind the perfect doctor for your needs with just a few taps\n",
+                     Text("Discover a world of healthcare options at your fingertips"
+                         "\n\nFind the perfect doctor for your needs with just a few taps\n",
                       style: TextStyle(
                           fontSize: 22,
                           fontWeight:FontWeight.bold,
@@ -73,7 +74,8 @@ class _MyHomeState extends State<MyHome> {
                       'assets/img/slider3.jpg'
                   ),
                   [
-                     Text("Access a wide range of specialists and medical professionals Caring About Your Health\n\nEnjoy the convenience of online consultations from your home.",
+                     Text("Access a wide range of specialists and medical professionals Caring About Your Health"
+                         "\n\nEnjoy the convenience of online consultations from your home.",
                       style: TextStyle(
                           fontSize: 22,
                           fontWeight:FontWeight.bold,

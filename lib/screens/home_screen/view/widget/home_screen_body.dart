@@ -67,6 +67,7 @@ class HomeScreenBody extends StatelessWidget {
                                     value: index+1,
                                     groupValue: cubit.selectItem,
                                     onChanged: (value) {
+                                      HomeCubit.get(context).getAllCityAboutGovernment(cubit.governmentModel!.data![index].id!);
                                       print(value);
                                       print("m + b");
                                       setState(() {
