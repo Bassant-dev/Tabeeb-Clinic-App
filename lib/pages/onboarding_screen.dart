@@ -1,9 +1,5 @@
-
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-
-import '../LoginScreen/view/SignInScreen.dart';
-import '../register_screen/view/widget/register_screen_body.dart';
 
 class MyHome extends StatefulWidget {
   @override
@@ -34,7 +30,7 @@ class _MyHomeState extends State<MyHome> {
             children: [
               OnboardingScreen(
                   Image.asset(
-                      'assets/img/slider4.jpg',
+                      'assests/slider4.jpg',
                   ),
                   [
                      Text("Discover a world of healthcare options at your fingertips\n\nFind the perfect doctor for your needs with just a few taps\n",
@@ -70,10 +66,10 @@ class _MyHomeState extends State<MyHome> {
               ),
               OnboardingScreen(
                   Image.asset(
-                      'assets/img/slider3.jpg'
+                      'assests/slider3.jpg'
                   ),
                   [
-                     Text("Access a wide range of specialists and medical professionals Caring About Your Health\n",
+                     Text("Access a wide range of specialists and medical professionals Caring About Your Health\n\nEnjoy the convenience of online consultations from your home.",
                       style: TextStyle(
                           fontSize: 22,
                           fontWeight:FontWeight.bold,
@@ -105,7 +101,7 @@ class _MyHomeState extends State<MyHome> {
 
               ),
               OnboardingScreen(
-                Image.asset('assets/img/slider2.png'),
+                Image.asset('assests/slider2.png'),
                 [
                    Text("Take control of your healthcare journey with our intuitive app\n\nReserve Your Doctor Now!", style: TextStyle(
                       fontSize: 22,
@@ -121,13 +117,7 @@ class _MyHomeState extends State<MyHome> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      OutlinedButton(onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) =>   SignInScreen()),
-                        );
-                      }
-                        , child: Text(
+                      OutlinedButton(onPressed: (){}, child: Text(
                           "Login",
                         style: TextStyle(
                           fontSize: 21,
@@ -140,13 +130,7 @@ class _MyHomeState extends State<MyHome> {
                           shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0))),
 
                         ),),
-                      OutlinedButton(onPressed: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) =>  RegisterScreenBody()),
-                        );
-
-                      }, child: Text(
+                      OutlinedButton(onPressed: (){}, child: Text(
                           "Sign up",
                         style: TextStyle(
                           fontSize: 21,

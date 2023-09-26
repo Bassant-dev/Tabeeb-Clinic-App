@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hexcolor/hexcolor.dart';
-import '../../../../core/cache_helper.dart';
-import '../../../../core/component.dart';
-import '../../../home_screen/view/home_screen.dart';
-import '../../view_model/cubit/cubit.dart';
-import '../../view_model/cubit/states.dart';
 
-class RegisterScreenBody extends StatefulWidget {
-  RegisterScreenBody({Key? key}) : super(key: key);
+class ProfileEditBody extends StatefulWidget {
+  ProfileEditBody({Key? key}) : super(key: key);
 
   @override
   _RegisterScreenBodyState createState() => _RegisterScreenBodyState();
 }
 
-class _RegisterScreenBodyState extends State<RegisterScreenBody> {
+class _RegisterScreenBodyState extends State<ProfileEditBody> {
   bool isvisible = false;
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
@@ -25,29 +16,13 @@ class _RegisterScreenBodyState extends State<RegisterScreenBody> {
   var phoneController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   String selectedGender = '1';
-
-  Future<void> storeTokenInSharedPreferences(String token) async {
-    CacheHelper.saveData(key: "token", value: token);
-  }
+  bool Gender = true;
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<RegisterCubit, RegisterStates>(
-      listener: (BuildContext context, RegisterStates state) {
-        if(state is RegisterSuccessState){
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
-          );
-
-        }
-
-      },
-
-      builder: (context, state) {
-        return Scaffold(
+    return  Scaffold(
           appBar: AppBar(
-            backgroundColor: HexColor("#174068"),
+            backgroundColor: Color(0XFF174068),
           ),
           body: SingleChildScrollView(
             child: Padding(
@@ -57,23 +32,23 @@ class _RegisterScreenBodyState extends State<RegisterScreenBody> {
                 child: Column(
                   children: [
                     Text(
-                      'Let’s get started!',
-                      style: GoogleFonts.roboto(fontSize: 24, fontWeight: FontWeight.bold),
+                      'Update details!',
+                      style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 20),
                     Text(
-                      'Create an account and start booking now.',
-                      style: GoogleFonts.roboto(
-                        fontSize: 16.sp,
-                        color: HexColor('#7C808A'),
+                      'Update your info and become a new you!',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color(0XFF030E19),
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 20.h),
-                    defaultFormField(
+                    SizedBox(height: 20),
+                    TextFormField(
                       controller: nameController,
-                      type: TextInputType.emailAddress,
-                      validate: (String? value) {
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (String? value) {
                         if (value!.isEmpty) {
                           return 'Please enter your name';
                         }
@@ -82,13 +57,22 @@ class _RegisterScreenBodyState extends State<RegisterScreenBody> {
                         }
                         return null;
                       },
-                      label: 'Name',
+                      decoration: InputDecoration(
+                        labelText: 'Name',
+                        enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                          width: 2.0,
+                        ),
+                      ),
+                      ),
                     ),
-                    SizedBox(height: 20.h),
-                    defaultFormField(
+                    SizedBox(height: 20),
+                    TextFormField(
                       controller: emailController,
-                      type: TextInputType.emailAddress,
-                      validate: (String? value) {
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (String? value) {
                         if (value!.isEmpty) {
                           return 'Please enter your email';
                         }
@@ -97,13 +81,22 @@ class _RegisterScreenBodyState extends State<RegisterScreenBody> {
                         }
                         return null;
                       },
-                      label: 'Email',
+                      decoration: InputDecoration(
+                        labelText: 'Email',
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                            width: 2.0,
+                          ),
+                        ),
+                      ),
                     ),
-                    SizedBox(height: 20.h),
-                    defaultFormField(
+                    SizedBox(height: 20),
+                    TextFormField(
                       controller: phoneController,
-                      type: TextInputType.phone,
-                      validate: (String? value) {
+                      keyboardType: TextInputType.phone,
+                      validator: (String? value) {
                         if (value!.isEmpty) {
                           return 'Please enter your phone';
                         }
@@ -112,47 +105,52 @@ class _RegisterScreenBodyState extends State<RegisterScreenBody> {
                         }
 
                       },
-                      label: 'Phone',
-                    ),
+                      decoration: InputDecoration(
+                        labelText: 'Phone',
 
-                    SizedBox(height: 20.h),
-                    defaultFormField(
-
-                      controller: passwordController,
-                      type: TextInputType.visiblePassword,
-                      validate: (String? value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter your password';
-                        }
-                        return null;
-                      },
-                      label: 'Password',
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                            width: 2.0,
+                          ),
+                        ),
+                      ),
                     ),
-                    SizedBox(height: 20.h),
-                    defaultFormField(
-                      controller: confirmPasswordController,
-                      type: TextInputType.visiblePassword,
-                      validate: (String? value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter your password again';
-                        }
-                        else if(passwordController.text!=confirmPasswordController.text){
-                          return 'confirm password doesn\'t match password';
-                        }
-
-                        return null;
-                      },
-                      label: 'Confirm Password',
-                    ),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 20),
 
                     // Radio buttons for gender selection
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        /*Row(
+                          children: [
+                            Checkbox(
+                                value:false , //Male
+                                onChanged: (value)
+                                {
+                                  setState(() {
+                                   Gender=false;
+                                  });
+                                }
+                            ),
+                            Text('Male'),
+                            Checkbox(
+                                value:true , //Male
+                                onChanged: (value)
+                                {
+                                  setState(() {
+                                    Gender=true;
+                                  });
+                                }
+                            ),
+                            Text('Female'),
+                          ],
+                        ),*/
                         Row(
                           children: [
                             Radio(
+
                               value: '0', // Male
                               groupValue: selectedGender,
                               onChanged: (value) {
@@ -161,7 +159,12 @@ class _RegisterScreenBodyState extends State<RegisterScreenBody> {
                                 });
                               },
                             ),
-                            Text('Male'),
+                            Text('Male',
+                              style: TextStyle(
+                                color: Color(0XFF030E19),
+                                fontSize: 16
+                              ),
+                            ),
                             Radio(
                               value: '1', // Female
                               groupValue: selectedGender,
@@ -171,25 +174,37 @@ class _RegisterScreenBodyState extends State<RegisterScreenBody> {
                                 });
                               },
                             ),
-                            Text('Female'),
+                            Text('Female',
+                              style: TextStyle(
+                                  color: Color(0XFF030E19),
+                                  fontSize: 16
+                              ),
+                            ),
                           ],
-                        ),
+                      ),
                       ],
                     ),
 
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 20),
                     Row(
                       children: [
-                        Text('Already have an account? Login here', style: TextStyle(fontSize: 16)),
                         SizedBox(height: 5,),
-                       // TextButton('Login here', onPressed: (){}, child: ,)
+                        TextButton( onPressed: (){},
+                          child:Text('Change Password?',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Color(0XFF030E19)
+                              )
+                          ),
+                        )
 
 
                       ],
                     ),
-SizedBox(height: 10,),
+                    SizedBox(height: 10,),
                     ElevatedButton(
                       onPressed: () {
+                        /*
                         if (formKey.currentState!.validate()) {
                           isvisible = true;
                           RegisterCubit.get(context).addRegister(
@@ -201,10 +216,10 @@ SizedBox(height: 10,),
                             ConfirmPassword: confirmPasswordController.text,
                           );
                         }
-
+                        */
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: HexColor('#174068'),
+                        primary: Color(0XFF174068),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(0),
                         ),
@@ -212,7 +227,7 @@ SizedBox(height: 10,),
                       ),
                       child: Text(
                         'Register',
-                        style: GoogleFonts.roboto(fontSize: 14.sp, color: Colors.white),
+                        style: TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     ),
                   ],
@@ -221,7 +236,7 @@ SizedBox(height: 10,),
             ),
           ),
         );
-      },
-    );
+      }
+
   }
-}
+

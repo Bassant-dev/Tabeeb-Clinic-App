@@ -2,10 +2,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-import '../onboarding_screen/onboarding_screen.dart';
+import 'onboarding_screen.dart';
 
-
-class MyHomePage extends  StatefulWidget {
+class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -36,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Spacer(flex: 3,),
             Image.asset(
-                'assets/img/slider5.jpg',
+                'assests/slider5.jpg',
             ),
             Text(
               'Tabeeb',
