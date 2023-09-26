@@ -9,9 +9,12 @@ import '../../../ProfileScreen/view/screens/UserProfileScreen.dart';
 import '../../../doctor_details/view model/doctor_details_cubit.dart';
 import '../../../doctor_details/views/doctor details view.dart';
 import '../../../profile_history_details/views/profile_history_details.dart';
+import '../../../profile_history_details/views/widgets/historpage.dart';
 import '../../../search/views/search view.dart';
 import '../../view_model/cubit/cubit.dart';
 import '../../view_model/cubit/states.dart';
+import '../home_screen.dart';
+import 'getalldoctors.dart';
 
 
 class HomeScreenBody extends StatelessWidget {
@@ -49,46 +52,12 @@ class HomeScreenBody extends StatelessWidget {
                 ),
                 Card(
                   child: ExpansionTile(
-                    title: Text("CITY"),
-                    children: [
-                      StatefulBuilder(
-                          builder: (BuildContext context, StateSetter setState /*You can rename this!*/){
-                            return  Container(
-                              height: 200, // Adjust the height as needed
-                              child: ListView.builder(
-                                itemCount: cubit.cityModel != null ? cubit.cityModel!.data!.length : 0,
-                                itemBuilder: (context, index) {
-                                  final Data = cubit.cityModel?.data?[index];
-                                  return RadioListTile(
-                                    title: Text("${Data!.name}"),
-                                    value: index+1,
-                                    groupValue: cubit.selectItem,
-                                    onChanged: (value) {
-                                      print(value);
-                                      print("m + b");
-                                      setState(() {
-                                        HomeCubit.get(context).selectItem=value;
-                                      });
-                                      // HomeCubit.get(context).selectOption(value!);
-                                    },
-
-                                  );
-                                },
-                              ),
-                            );
-                          }
-                      ),
-                    ],
-                  ),
-                ),
-                Card(
-                  child: ExpansionTile(
                     title: Text("GOVERNMENT"),
                     children: [
                       StatefulBuilder(
                           builder: (BuildContext context, StateSetter setState /*You can rename this!*/){
                             return  Container(
-                              height: 200, // Adjust the height as needed
+                              height: 200,
                               child: ListView.builder(
                                 itemCount: cubit.governmentModel != null ? cubit.governmentModel!.data!.length : 0,
                                 itemBuilder: (context, index) {
@@ -102,6 +71,7 @@ class HomeScreenBody extends StatelessWidget {
                                       print("m + b");
                                       setState(() {
                                         HomeCubit.get(context).selectItem=value;
+                                        print(value);
                                       });
                                       // HomeCubit.get(context).selectOption(value!);
                                     },
@@ -117,6 +87,42 @@ class HomeScreenBody extends StatelessWidget {
                 ),
                 Card(
                   child: ExpansionTile(
+                    title: Text("CITY"),
+                    children: [
+                      StatefulBuilder(
+                          builder: (BuildContext context, StateSetter setState /*You can rename this!*/){
+                            return  Container(
+                              height: 200,
+                              child: ListView.builder(
+                                itemCount: cubit.cityAboutGovernmentModel!= null ? cubit.cityAboutGovernmentModel!.data!.length : 0,
+                                itemBuilder: (context, index) {
+                                  final Data2 = cubit.cityAboutGovernmentModel?.data?[index];
+                                  return RadioListTile(
+                                    title: Text("${Data2!.name}"),
+                                    value: index+1,
+                                    groupValue: cubit.selectItem,
+                                    onChanged: (value) {
+                                      print(value);
+                                      print("m + b");
+                                      setState(() {
+                                        HomeCubit.get(context).selectItem=value;
+
+                                      });
+
+                                    },
+
+                                  );
+                                },
+                              ),
+                            );
+                          }
+                      ),
+                    ],
+                  ),
+                ),
+
+                Card(
+                  child: ExpansionTile(
                     title: Text("SPECIALIZATION"),
                     children: [
                       StatefulBuilder(
@@ -126,9 +132,9 @@ class HomeScreenBody extends StatelessWidget {
                               child: ListView.builder(
                                 itemCount: cubit.specialModel != null ? cubit.specialModel!.data!.length : 0,
                                 itemBuilder: (context, index) {
-                                  final Data = cubit.specialModel?.data?[index];
+                                  final Data3 = cubit.specialModel?.data?[index];
                                   return RadioListTile(
-                                    title: Text("${Data!.name}"),
+                                    title: Text("${Data3!.name}"),
                                     value: index+1,
                                     groupValue: cubit.selectItem,
                                     onChanged: (value) {
@@ -154,7 +160,11 @@ class HomeScreenBody extends StatelessWidget {
                 SizedBox(height: 10,),
                 ElevatedButton(
                   onPressed: () {
-
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>   GetAllDoctors(),
+                      ),
+                    );
 
 
                   },
@@ -209,7 +219,15 @@ class HomeScreenBody extends StatelessWidget {
                   children: [
                     IconButton(
                       icon: Icon(Icons.home, color: HexColor('#174068')),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>  HomeScreen(),
+                          ),
+                        );
+
+
+                      },
                     ),
                     Text(
                       'Home',
@@ -222,7 +240,14 @@ class HomeScreenBody extends StatelessWidget {
                   children: [
                     IconButton(
                       icon: Icon(Icons.add, color: HexColor('#174068')),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>   GetAllDoctors(),
+                          ),
+                        );
+
+                      },
                     ),
                     Text(
                       'Doctors',
@@ -236,11 +261,11 @@ class HomeScreenBody extends StatelessWidget {
                     IconButton(
                       icon: Icon(Icons.history, color: HexColor('#174068')),
                       onPressed: () {
-                    /*    Navigator.of(context).push(
+                     Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) =>  ProfileHistoryDetailsView(),
+                            builder: (context) =>  HistoryScreen(),
                           ),
-                        );*/
+                        );
 
                       },
                     ),

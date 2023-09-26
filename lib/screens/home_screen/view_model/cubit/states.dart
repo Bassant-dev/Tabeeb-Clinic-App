@@ -50,3 +50,21 @@ class RadioCubitSelectedadd extends HomeStates {
   //
   // RadioCubitSelectedadd(this.selectedOption);
 }
+class CityAboutGovernmentLoadingState extends   HomeStates{}
+class CityAboutGovernmentSuccessState extends   HomeStates
+{
+
+
+}
+class CityAboutGovernmentErrorState extends   HomeStates
+{
+}
+class GetAllDoctorsLoadingState extends   HomeStates{}
+class GetAllDoctorsSuccessState extends   HomeStates
+{
+
+
+}
+class GetAllDoctorsErrorState extends   HomeStates
+{
+}

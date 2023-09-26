@@ -10,7 +10,9 @@ import 'package:v_care_clinic/screens/register_screen/view_model/cubit/states.da
 import '../../../../core/cache_helper.dart';
 import '../../../../core/dio_helper.dart';
 
+import '../../model/city_about_government.dart';
 import '../../model/city_model.dart';
+import '../../model/get_all_doctors.dart';
 import '../../model/government_model.dart';
 import '../../model/home_model.dart';
 import '../../view/widget/home_screen_body.dart';
@@ -22,7 +24,60 @@ class HomeCubit extends Cubit<HomeStates> {
   static HomeCubit get(context) => BlocProvider.of<HomeCubit>(context);
 
   final Dio dio = Dio();
+  CityAboutGovernmentModel? cityAboutGovernmentModel;
+  Future<void>getAllCityAboutGovernment(int index)async
+  {
+    emit(CityAboutGovernmentLoadingState());
 
+
+    try {
+      Response data = await DioHelper.getData(
+          url: 'city/show/$index',
+          token: CacheHelper.getData(key: "token"));
+      if (data.statusCode == 200) {
+        cityAboutGovernmentModel = CityAboutGovernmentModel.fromJson(data.data);
+      }
+
+
+      emit(CityAboutGovernmentSuccessState());
+    } on Exception catch (e) {
+      if (e is DioError && e.response?.statusCode == 401) {
+        final error = e.response?.data;
+        final m = error["message"];
+        print(error);
+        print(m);
+      }
+      emit(SpecializationErrorState());
+      print(e.toString());
+    }
+  }
+  GetALLDoctors ? getALLDoctors;
+  Future<void>getAllDoctors()async
+  {
+    emit(GetAllDoctorsLoadingState());
+
+
+    try {
+      Response data = await DioHelper.getData(
+          url: 'doctor/index',
+          token: CacheHelper.getData(key: "token"));
+      if (data.statusCode == 200) {
+        getALLDoctors = GetALLDoctors.fromJson(data.data);
+      }
+
+
+      emit(GetAllDoctorsSuccessState());
+    } on Exception catch (e) {
+      if (e is DioError && e.response?.statusCode == 401) {
+        final error = e.response?.data;
+        final m = error["message"];
+        print(error);
+        print(m);
+      }
+      emit(GetAllDoctorsErrorState());
+      print(e.toString());
+    }
+  }
   int? selectItem;
 
   void selectOption(int option) {
@@ -126,6 +181,7 @@ class HomeCubit extends Cubit<HomeStates> {
 
 
   }
+
  SpecialModel?specialModel;
 
   Future<void>getAllSpecializatio()async
@@ -159,5 +215,6 @@ class HomeCubit extends Cubit<HomeStates> {
 
 
   }
+
 
 }
