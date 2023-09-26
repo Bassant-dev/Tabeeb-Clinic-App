@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/appcolors/colors.dart';
+
+import '../../../../core/appcolors.dart';
 import '../../view model/doctor_details_cubit.dart';
 class TimeItem extends StatelessWidget {
   const TimeItem({

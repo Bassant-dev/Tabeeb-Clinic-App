@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:vcareapp/core/appcolors/colors.dart';
-import 'package:vcareapp/features/login_register_feature/views/widgets/custom_text_form_field.dart';
-import 'package:vcareapp/features/search/view%20model/search_cubit.dart';
 
-import '../../../core/appfont/styles.dart';
+import '../../../core/appcolors.dart';
+import '../../../core/appfont.dart';
+import '../view model/search_cubit.dart';
+
 
 class SearchView extends StatelessWidget {
   const SearchView({Key? key}) : super(key: key);
@@ -53,5 +53,50 @@ class SearchView extends StatelessWidget {
         );
       },
     ),);
+  }
+}
+class CustomTextFormField extends StatelessWidget {
+  const CustomTextFormField({
+    Key? key,
+    required this.hintText,
+    required this.inputType,
+    required this.controller,
+    this.onFieldSubmitted,
+    this.validator,
+    this.maxLines,
+    this.icon,
+  }) : super(key: key);
+  final String hintText;
+  final TextInputType inputType;
+  final TextEditingController controller;
+  final String? Function(String?)? validator;
+  final int? maxLines ;
+  final void Function(String)? onFieldSubmitted;
+  final Widget ?icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(cursorColor: AppColors.primaryColor,
+      onFieldSubmitted:onFieldSubmitted ,
+      maxLines: maxLines,
+      keyboardType: inputType,
+      controller: controller,
+      validator: validator,
+      decoration: InputDecoration(prefixIcon: icon,
+        hintText: hintText,
+        border: buildOutlineInputBorder(),
+        enabledBorder: buildOutlineInputBorder(),
+        focusedBorder: buildOutlineInputBorder(),
+      ),
+    );
+  }
+
+  OutlineInputBorder buildOutlineInputBorder() {
+    return OutlineInputBorder(
+      borderSide: const BorderSide(color: Color(0xff091E4A)),
+      borderRadius: BorderRadius.circular(
+        4,
+      ),
+    );
   }
 }

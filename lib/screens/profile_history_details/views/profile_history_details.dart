@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vcareapp/core/appcolors/colors.dart';
-import 'package:vcareapp/features/profile_history_details/views/widgets/profile_history_details_view_body.dart';
+import 'package:v_care_clinic/screens/profile_history_details/views/widgets/profile_history_details_view_body.dart';
 
-import '../../../core/appfont/styles.dart';
+import '../../../core/appcolors.dart';
+import '../../../core/appfont.dart';
+
 
 class ProfileHistoryDetailsView extends StatelessWidget {
   const ProfileHistoryDetailsView({Key? key}) : super(key: key);

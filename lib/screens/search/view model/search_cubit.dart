@@ -2,8 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
-import 'package:vcareapp/core/diohelper/dio.dart';
-import 'package:vcareapp/features/search/model/search%20model.dart';
+
+import '../../../core/cache_helper.dart';
+import '../../../core/dio_helper.dart';
+import '../model/search model.dart';
 
 part 'search_state.dart';
 
@@ -15,7 +17,7 @@ class SearchCubit extends Cubit<SearchState> {
   {
     searchResults=[];
    try {
-     Response response= await DioHelper.getData(endPoint: '/doctor/doctor-search?name=${searchController.text}');
+     Response response= await DioHelper.getData(url: 'doctor/doctor-search?name=${searchController.text}',token: CacheHelper.getData(key: "token"));
        print(response.data['message']);
      response.data['data'].forEach((item){
        searchResults.add(SearchModel.fromJson(item));

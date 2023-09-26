@@ -8,6 +8,7 @@ import 'package:v_care_clinic/screens/home_screen/view/widget/home_screen_body.d
 import 'package:v_care_clinic/screens/home_screen/view_model/cubit/cubit.dart';
 import 'package:v_care_clinic/screens/register_screen/view/register_screen.dart';
 import 'package:v_care_clinic/screens/register_screen/view_model/cubit/cubit.dart';
+import 'package:v_care_clinic/screens/search/view%20model/search_cubit.dart';
 import 'package:v_care_clinic/screens/splash_screen/splash_screen.dart';
 
 import 'core/bloc_observer.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
            // BlocProvider(create: (context)=> HomeCubit()..getAllDoctor(),),
             BlocProvider(create: (context)=> DoctorDetailsCubit()),
             BlocProvider(create: (context)=>  SignInCubit()),
+            BlocProvider(create: (context)=>  SearchCubit ()),
 
 
 
