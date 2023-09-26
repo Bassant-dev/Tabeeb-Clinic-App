@@ -236,11 +236,11 @@ class HomeScreenBody extends StatelessWidget {
                     IconButton(
                       icon: Icon(Icons.history, color: HexColor('#174068')),
                       onPressed: () {
-                        Navigator.of(context).push(
+                    /*    Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) =>  ProfileHistoryDetailsView(),
                           ),
-                        );
+                        );*/
 
                       },
                     ),
