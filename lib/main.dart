@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(create: (context)=> RegisterCubit()),
             BlocProvider(create: (context)=> HomeCubit()..getAllDoctorSpec()..getAllCity()..getAllGovernment()..getAllSpecializatio()),
-           // BlocProvider(create: (context)=> HomeCubit()..getAllDoctor(),),
             BlocProvider(create: (context)=> DoctorDetailsCubit()),
             BlocProvider(create: (context)=>  SignInCubit()),
             BlocProvider(create: (context)=>  SearchCubit ()),

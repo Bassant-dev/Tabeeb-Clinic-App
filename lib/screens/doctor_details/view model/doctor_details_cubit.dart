@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
@@ -13,6 +14,7 @@ part 'doctor_details_state.dart';
 
 class DoctorDetailsCubit extends Cubit<DoctorDetailsState> {
   DoctorDetailsCubit() : super(DoctorDetailsInitial());
+  static DoctorDetailsCubit get(context) => BlocProvider.of<DoctorDetailsCubit>(context);
   DoctorDetailsModel ?model;
   DateTime ? dateTime;
   TextEditingController dateTimeController=TextEditingController();

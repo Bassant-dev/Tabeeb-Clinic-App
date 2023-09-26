@@ -403,7 +403,7 @@ class HomeScreenBody extends StatelessWidget {
                                             IconButton(
                                               onPressed: () {
                                                 print(doctor.id!);
-                                                BlocProvider.of<DoctorDetailsCubit>(context).showDetails(doctor.id!);
+                                                DoctorDetailsCubit.get(context).showDetails(doctor.id!);
                                                 Navigator.of(context).push(
                                                   MaterialPageRoute(
                                                     builder: (context) => DoctorDetailsView(id: doctor.id!),

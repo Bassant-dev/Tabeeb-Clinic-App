@@ -1,4 +1,4 @@
-import 'dart:math';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -7,13 +7,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/appcolors.dart';
 import '../../../core/appfont.dart';
-
 import '../view model/doctor_details_cubit.dart';
 
-class DoctorDetailsView extends StatelessWidget {
-  DoctorDetailsView({Key? key,required this.id}) : super(key: key);
-  int id;
 
+class DoctorDetailsView extends StatelessWidget {
+ DoctorDetailsView({Key? key,required this.id}) : super(key: key);
+int id;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

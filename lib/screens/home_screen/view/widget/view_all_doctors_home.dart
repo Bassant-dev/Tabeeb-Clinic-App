@@ -122,7 +122,7 @@ class DoctorCard extends StatelessWidget {
               onPressed: () {
                 print(doctorId);
 
-                BlocProvider.of<DoctorDetailsCubit>(context).showDetails(doctorId);
+                DoctorDetailsCubit.get(context).showDetails(doctorId);
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => DoctorDetailsView(id: doctorId),
