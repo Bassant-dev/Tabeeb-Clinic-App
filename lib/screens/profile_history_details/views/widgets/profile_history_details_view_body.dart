@@ -1,285 +1,282 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:v_care_clinic/core/appcolors.dart';
-import 'package:v_care_clinic/core/appfont.dart';
-import 'package:v_care_clinic/screens/ProfileScreen/models/AppointmentModel/Data.dart';
+
+import '../../../../core/appcolors.dart';
+import '../../../../core/appfont.dart';
+
+import '../../../doctor_details/view model/doctor_details_cubit.dart';
 
 class ProfileHistoryDetailsViewBody extends StatelessWidget {
- const  ProfileHistoryDetailsViewBody(this.appointment);
- final AppointmentData ?appointment;
-
-  //const ProfileHistoryDetailsViewBody({Key? key}) : super(key: key);
+  const ProfileHistoryDetailsViewBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 24.h,
-            ),
-            SizedBox(
-              width: 115.w,
-              height: 35.h,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryColor,
-                  ),
-                  onPressed: () {},
-                  child: Text(
-                    'PRINT',
-                    style: Styles.textStyle16
-                        .copyWith(fontWeight: FontWeight.w500),
-                  )),
-            ),
-            SizedBox(
-              height: 25.h,
-            ),
-            Text(
-              'Doctor details',
+      child: BlocProvider.of<DoctorDetailsCubit>(context)
+              .dateTimeController
+              .text
+              .isEmpty
+          ? Center(
+              child: Text(
+              'There is no booking now',
               style: Styles.textStyle20.copyWith(
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.bold,
               ),
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            Row(
+            ))
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'doctor name',
-                  style: Styles.textStyle16,
+                SizedBox(
+                  height: 24.h,
                 ),
-                Spacer(),
-                Text(
-
-                  '${appointment!.doctor!.name!}',
-                  style: Styles.textStyle16,
+                SizedBox(
+                  width: 115.w,
+                  height: 35.h,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primaryColor,
+                      ),
+                      onPressed: () {},
+                      child: Text(
+                        'PRINT',
+                        style: Styles.textStyle16
+                            .copyWith(fontWeight: FontWeight.w500),
+                      )),
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-             Row(
-              children: [
-                Text(
-                  'location',
-                  style: Styles.textStyle16,
+                SizedBox(
+                  height: 25.h,
                 ),
-                Spacer(),
                 Text(
-
-                  '${appointment!.doctor!.address!}',
-textAlign: TextAlign.center,
-
-                  style: Styles.textStyle16,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-             Row(
-              children: [
-                Text(
-                  'doctor email',
-
-
-                  style: Styles.textStyle16,
-                ),
-                Spacer(),
-                Text(
-                  '${appointment!.doctor!.email!}',
-
-                  style: Styles.textStyle16,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-             Row(
-              children: [
-                Text(
-                  'phone',
-                  style: Styles.textStyle16,
-                ),
-                Spacer(),
-                Text(
-                  '${appointment!.doctor!.phone!}',
-                  style: Styles.textStyle16,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            Text(
-              'Patient details',
-              style: Styles.textStyle20.copyWith(
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            Row(
-              children: [
-                Text(
-                  'name',
-                  style: Styles.textStyle16,
-                ),
-                Spacer(),
-                Text(
-                  '${appointment!.patient!.name}',
-                  style: Styles.textStyle16,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-            const Row(
-              children: [
-                Text(
-                  'location',
-                  style: Styles.textStyle16,
-                ),
-                Spacer(),
-                Text(
-                  'user location',
-                  style: Styles.textStyle16,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-             Row(
-              children: [
-                Text(
-                  'email',
-                  style: Styles.textStyle16,
-                ),
-                Spacer(),
-                Text(
-                  '${appointment!.patient!.email}',
-                  style: Styles.textStyle16,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-             Row(
-              children: [
-                Text(
-                  'phone',
-                  style: Styles.textStyle16,
-                ),
-                Spacer(),
-                Text(
-                  '${appointment!.patient!.phone}',
-                  style: Styles.textStyle16,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            Text(
-              'Appointment details',
-              style: Styles.textStyle20.copyWith(
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-             Row(
-              children: [
-                Text(
-                  'date',
-                  style: Styles.textStyle16,
-                ),
-                Spacer(),
-                Flexible(
-                  child: Text(
-                    '${appointment!.appointmentTime}',
-                    style: Styles.textStyle16,
+                  'Doctor details',
+                  style: Styles.textStyle20.copyWith(
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-             Row(
-              children: [
-                Text(
-                  'appointment id',
-                  style: Styles.textStyle16,
+                SizedBox(
+                  height: 20.h,
                 ),
-                Spacer(),
-                Text(
-                  '${appointment!.id}',
-                  style: Styles.textStyle16,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-             Row(
-              children: [
-                Text(
-                  'status',
-                  style: Styles.textStyle16,
-                ),
-                Spacer(),
-                Text(
-                  '${appointment!.status}',
-                  style: Styles.textStyle16,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-            SizedBox(
-                width: 328.w,
-                height: 39.h,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primaryColor,
+                const Row(
+                  children: [
+                    Text(
+                      'name',
+                      style: Styles.textStyle16,
                     ),
-                    onPressed: () {},
-                    child: Row(
-                      children: [
-                        Text(
-                          'Total',
-                          style: Styles.textStyle16
-                              .copyWith(fontWeight: FontWeight.w500),
+                    Spacer(),
+                    Text(
+                      'doctor name',
+                      style: Styles.textStyle16,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                const Row(
+                  children: [
+                    Text(
+                      'location',
+                      style: Styles.textStyle16,
+                    ),
+                    Spacer(),
+                    Text(
+                      'doctor location',
+                      style: Styles.textStyle16,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                const Row(
+                  children: [
+                    Text(
+                      'email',
+                      style: Styles.textStyle16,
+                    ),
+                    Spacer(),
+                    Text(
+                      'doctor email',
+                      style: Styles.textStyle16,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                const Row(
+                  children: [
+                    Text(
+                      'phone',
+                      style: Styles.textStyle16,
+                    ),
+                    Spacer(),
+                    Text(
+                      'doctor phone',
+                      style: Styles.textStyle16,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Text(
+                  'Patient details',
+                  style: Styles.textStyle20.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                const Row(
+                  children: [
+                    Text(
+                      'name',
+                      style: Styles.textStyle16,
+                    ),
+                    Spacer(),
+                    Text(
+                      'doctor name',
+                      style: Styles.textStyle16,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                const Row(
+                  children: [
+                    Text(
+                      'location',
+                      style: Styles.textStyle16,
+                    ),
+                    Spacer(),
+                    Text(
+                      'doctor location',
+                      style: Styles.textStyle16,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                const Row(
+                  children: [
+                    Text(
+                      'email',
+                      style: Styles.textStyle16,
+                    ),
+                    Spacer(),
+                    Text(
+                      'doctor email',
+                      style: Styles.textStyle16,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                const Row(
+                  children: [
+                    Text(
+                      'phone',
+                      style: Styles.textStyle16,
+                    ),
+                    Spacer(),
+                    Text(
+                      'doctor phone',
+                      style: Styles.textStyle16,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Text(
+                  'Appointment details',
+                  style: Styles.textStyle20.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                const Row(
+                  children: [
+                    Text(
+                      'date',
+                      style: Styles.textStyle16,
+                    ),
+                    Spacer(),
+                    Text(
+                      'date',
+                      style: Styles.textStyle16,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                const Row(
+                  children: [
+                    Text(
+                      'appointment id',
+                      style: Styles.textStyle16,
+                    ),
+                    Spacer(),
+                    Text(
+                      'id',
+                      style: Styles.textStyle16,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                const Row(
+                  children: [
+                    Text(
+                      'status',
+                      style: Styles.textStyle16,
+                    ),
+                    Spacer(),
+                    Text(
+                      'status',
+                      style: Styles.textStyle16,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                SizedBox(
+                    width: 328.w,
+                    height: 39.h,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primaryColor,
                         ),
-                        const Spacer(),
-                        Text(
-                          '\$${appointment!.appointmentPrice}',
-
-                         // '\$00.00',
-                          style: Styles.textStyle16.copyWith(
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
-                    )))
-          ],
-        ),
-      ),
+                        onPressed: () {},
+                        child: Row(
+                          children: [
+                            Text(
+                              'Total',
+                              style: Styles.textStyle16
+                                  .copyWith(fontWeight: FontWeight.w500),
+                            ),
+                            const Spacer(),
+                            Text(
+                              '\$00.00',
+                              style: Styles.textStyle16.copyWith(
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        )))
+              ],
+            ),
     );
   }
 }

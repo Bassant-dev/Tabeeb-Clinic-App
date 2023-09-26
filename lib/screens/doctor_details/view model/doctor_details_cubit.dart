@@ -1,16 +1,20 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 import '../../../core/cache_helper.dart';
 import '../../../core/dio_helper.dart';
 import '../model/doctor details model.dart';
+import '../views/booking_success_view.dart';
 part 'doctor_details_state.dart';
 
 class DoctorDetailsCubit extends Cubit<DoctorDetailsState> {
   DoctorDetailsCubit() : super(DoctorDetailsInitial());
+  static DoctorDetailsCubit get(context) => BlocProvider.of<DoctorDetailsCubit>(context);
   DoctorDetailsModel ?model;
   DateTime ? dateTime;
   TextEditingController dateTimeController=TextEditingController();
@@ -24,14 +28,12 @@ class DoctorDetailsCubit extends Cubit<DoctorDetailsState> {
   }
  Future showDetails( int ? doctorId)async// put doctorId here
   {
-
-   emit(DoctorDetailsLoading());
    try {
 
       Response response=await DioHelper.getData(
        url: 'doctor/show/$doctorId',
-        token:  CacheHelper.getData(key: "token")
-      );
+          token: CacheHelper.getData(key: "token"));
+
 model=DoctorDetailsModel.fromJson(response.data);
      print(DoctorDetailsModel.fromJson(response.data));
       print(response.data['message']);
@@ -67,6 +69,38 @@ model=DoctorDetailsModel.fromJson(response.data);
         }
 
       print(time.length);
+  }
+  bookAppointment(String time,context)async
+  {
+    try {
+      Response response= await DioHelper.postData(data: {
+        'doctor_id':'3',
+        'start_time':'${dateTimeController.text} $time'
+      },
+        url: 'appointment/store',
+          token: CacheHelper.getData(key: "token")
+      );
+      print(response.data['message']);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${response.data['message']}')));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+            const BookingSuccessView()),
+
+      );
+      dateTimeController.clear();
+      emit(BookedSuccessfully());
+    } on Exception catch (e) {
+      if(e is DioException )
+      {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${e.response?.data['data']['start_time'][0]}')));
+        print(e.response?.data['data']['start_time'][0]);
+      }
+      emit(BookedFailed());
+
+    }
+
   }
 
 int currentIndex=0;
