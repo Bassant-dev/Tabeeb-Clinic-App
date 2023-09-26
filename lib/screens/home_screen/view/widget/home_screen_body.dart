@@ -8,6 +8,7 @@ import 'package:v_care_clinic/screens/home_screen/view/widget/view_all_doctors_h
 import '../../../ProfileScreen/view/screens/UserProfileScreen.dart';
 import '../../../doctor_details/view model/doctor_details_cubit.dart';
 import '../../../doctor_details/views/doctor details view.dart';
+import '../../../profile_history_details/views/profile_history_details.dart';
 import '../../../search/views/search view.dart';
 import '../../view_model/cubit/cubit.dart';
 import '../../view_model/cubit/states.dart';
@@ -234,7 +235,14 @@ class HomeScreenBody extends StatelessWidget {
                   children: [
                     IconButton(
                       icon: Icon(Icons.history, color: HexColor('#174068')),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>  ProfileHistoryDetailsView(),
+                          ),
+                        );
+
+                      },
                     ),
                     Text(
                       'History',
