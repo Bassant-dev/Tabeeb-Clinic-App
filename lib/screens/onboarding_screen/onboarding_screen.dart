@@ -75,7 +75,7 @@ class _MyHomeState extends State<MyHome> {
                   ),
                   [
                      Text("Access a wide range of specialists and medical professionals Caring About Your Health"
-                         "\n\nEnjoy the convenience of online consultations from your home.",
+                        ,
                       style: TextStyle(
                           fontSize: 22,
                           fontWeight:FontWeight.bold,
