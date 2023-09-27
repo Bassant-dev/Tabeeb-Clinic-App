@@ -22,12 +22,3 @@ Welcome to our Flutter mobile application project developed during our internshi
 
 - **API Integration with Duo**: Our app seamlessly integrates with Duo using GET and POST requests to fetch and send data.
 
-## Getting Started
-
-To get started with our project, follow these steps:
-
-1. Clone the repository to your local machine:
-
-   ```bash
-   git clone https://github.com/your-username/flutter-mobile-app.git
-
