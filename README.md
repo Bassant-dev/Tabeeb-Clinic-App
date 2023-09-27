@@ -22,7 +22,6 @@ Welcome to our Flutter mobile application project developed during our internshi
 
 - **API Integration with Dio**: Our app seamlessly integrates with Duo using GET and POST requests to fetch and send data.
 - ## video
-- 
 https://github.com/Bassant-dev/Tabeeb-Clinic-App/assets/77055355/666d3fa5-ec50-4732-9d1b-62bf8c05c4f1
 
 
