@@ -13,4 +13,4 @@ MVVM Architecture: Our project follows the Model-View-ViewModel (MVVM) architect
 
 Cubit for State Management: We utilize Cubit for state management in our Flutter application, simplifying complex UI interactions and data flow.
 
-API Integration with Duo: Our app seamlessly integrates with Duo using GET and POST requests to fetch and send data.
+API Integration with Dio: Our app seamlessly integrates with Duo using GET and POST requests to fetch and send data.
