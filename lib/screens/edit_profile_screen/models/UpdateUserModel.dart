@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 import 'Edit_Data.dart';
+=======
+import 'Update_Data.dart';
+>>>>>>> Stashed changes
 
 class UpdateUserModel {
   UpdateUserModel({

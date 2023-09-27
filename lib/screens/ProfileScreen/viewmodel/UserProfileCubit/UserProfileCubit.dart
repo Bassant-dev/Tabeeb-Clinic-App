@@ -11,8 +11,6 @@ import 'package:v_care_clinic/screens/ProfileScreen/models/AppointmentModel/Data
 import 'package:v_care_clinic/screens/ProfileScreen/models/UserProfileModel/UserProfileModel.dart';
 import 'package:v_care_clinic/screens/ProfileScreen/viewmodel/UserProfileCubit/UserProfileStates.dart';
 
-
-
 class UserProfileCubit extends Cubit<UserProfileStates> {
   UserProfileCubit() : super(UserProfileInitialState());
   static UserProfileCubit get(context) => BlocProvider.of(context);
@@ -24,7 +22,7 @@ class UserProfileCubit extends Cubit<UserProfileStates> {
 
   void GetUserData
       () {
-
+    print("Ana dakhaltttttttttttttttt");
     emit(UserProfileLoadingState());
 
     DioHelper.getData(url: ApiConst.USERPROFILE,

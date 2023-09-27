@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+<<<<<<< Updated upstream
 import 'package:v_care_clinic/screens/ProfileScreen/view/screens/UserProfileScreen.dart';
+=======
+import 'package:v_care_clinic/core/SharedFunctions.dart';
+import 'package:v_care_clinic/screens/ProfileScreen/view/screens/UserProfileScreen.dart';
+import 'package:v_care_clinic/screens/ProfileScreen/viewmodel/UserProfileCubit/UserProfileCubit.dart';
+>>>>>>> Stashed changes
 import 'package:v_care_clinic/screens/edit_profile_screen/viewmodel/edit_profile_cubit.dart';
 
 class EditProfile extends StatefulWidget {
@@ -15,6 +21,11 @@ class _EditProfile extends State<EditProfile> {
   var emailController = TextEditingController();
   var nameController = TextEditingController();
   var phoneController = TextEditingController();
+<<<<<<< Updated upstream
+=======
+  var passwordController = TextEditingController();
+  var confirmPasswordController = TextEditingController();
+>>>>>>> Stashed changes
   var formKey = GlobalKey<FormState>();
   String selectedGender = '1';
   bool Gender = true;
@@ -25,10 +36,15 @@ class _EditProfile extends State<EditProfile> {
       listener: (context, EditProfileState state) {
         // TODO: implement listener
         if(state is EditProfileSuccess){
+<<<<<<< Updated upstream
           Navigator.pop(
             context,
             MaterialPageRoute(builder: (context) => UserProfileScreen()),
           );
+=======
+          BlocProvider.of<UserProfileCubit>(context).GetUserData();
+          navto(context, UserProfileScreen());
+>>>>>>> Stashed changes
         }
       },
       builder: (context, state) {
@@ -130,7 +146,56 @@ class _EditProfile extends State<EditProfile> {
                       ),
                     ),
                     SizedBox(height: 20),
+<<<<<<< Updated upstream
 
+=======
+                    TextFormField(
+                      controller: passwordController,
+                      keyboardType: TextInputType.visiblePassword,
+                      validator: (String? value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter your password ';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                            width: 2.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    TextFormField(
+                      controller: confirmPasswordController,
+                      keyboardType: TextInputType.visiblePassword,
+                      validator: (String? value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter your password';
+                        }
+                        else if (confirmPasswordController.text!=passwordController.text) {
+                          return 'confirm password doesn\'t match password';
+                        }
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Confirm Password',
+
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                            width: 2.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+>>>>>>> Stashed changes
                     // Radio buttons for gender selection
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -223,6 +288,12 @@ class _EditProfile extends State<EditProfile> {
                             name: nameController.text,
                             email: emailController.text,
                             phone: phoneController.text,
+<<<<<<< Updated upstream
+=======
+                            gender: selectedGender,
+                            password: passwordController.text,
+                            confirmpassword: confirmPasswordController.text,
+>>>>>>> Stashed changes
                           );
 
                         }
