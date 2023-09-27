@@ -20,7 +20,9 @@ Welcome to our Flutter mobile application project developed during our internshi
 
 - **Cubit for State Management**: We utilize Cubit for state management in our Flutter application, simplifying complex UI interactions and data flow.
 
-- **API Integration with Duo**: Our app seamlessly integrates with Duo using GET and POST requests to fetch and send data.
+- **API Integration with Dio**: Our app seamlessly integrates with Duo using GET and POST requests to fetch and send data.
 - ## video
-- https://github.com/Bassant-dev/Tabeeb-Clinic-App/issues/1#issue-1916161664
+- 
+https://github.com/Bassant-dev/Tabeeb-Clinic-App/assets/77055355/666d3fa5-ec50-4732-9d1b-62bf8c05c4f1
+
 
