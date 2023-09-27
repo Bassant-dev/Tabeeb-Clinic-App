@@ -1,7 +1,5 @@
 # Flutter Mobile Application Project by Eraasoft Interns
 
-![App Screenshot](screenshot.png)
-
 ## Introduction
 
 Welcome to our Flutter mobile application project developed during our internship at Eraasoft! This project is aimed at making doctor reservations easy and efficient. Users can seamlessly reserve appointments with doctors, whether they're looking for a specialist or a general practitioner. With advanced search and filter features, finding the perfect healthcare provider is a breeze.
