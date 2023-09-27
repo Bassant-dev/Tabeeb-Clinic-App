@@ -1,16 +1,33 @@
-Flutter Mobile Application Project by Eraasoft Interns
+# Flutter Mobile Application Project by Eraasoft Interns
+
+![App Screenshot](screenshot.png)
+
+## Introduction
+
 Welcome to our Flutter mobile application project developed during our internship at Eraasoft! This project is aimed at making doctor reservations easy and efficient. Users can seamlessly reserve appointments with doctors, whether they're looking for a specialist or a general practitioner. With advanced search and filter features, finding the perfect healthcare provider is a breeze.
 
-Key Features
-Doctor Reservations: Users can easily reserve appointments with doctors of their choice.
+## Key Features
 
-Advanced Search and Filters: Our app provides advanced search and filter options to help users find the right healthcare provider with precision.
+- **Doctor Reservations**: Users can easily reserve appointments with doctors of their choice.
 
-Appointment Management: The app automatically removes missed appointments from the list, ensuring users stay organized and never miss an appointment.
+- **Advanced Search and Filters**: Our app provides advanced search and filter options to help users find the right healthcare provider with precision.
 
-Technologies Used
-MVVM Architecture: Our project follows the Model-View-ViewModel (MVVM) architectural pattern to ensure clean and organized code.
+- **Appointment Management**: The app automatically removes missed appointments from the list, ensuring users stay organized and never miss an appointment.
 
-Cubit for State Management: We utilize Cubit for state management in our Flutter application, simplifying complex UI interactions and data flow.
+## Technologies Used
 
-API Integration with Dio: Our app seamlessly integrates with Duo using GET and POST requests to fetch and send data.
+- **MVVM Architecture**: Our project follows the Model-View-ViewModel (MVVM) architectural pattern to ensure clean and organized code.
+
+- **Cubit for State Management**: We utilize Cubit for state management in our Flutter application, simplifying complex UI interactions and data flow.
+
+- **API Integration with Duo**: Our app seamlessly integrates with Duo using GET and POST requests to fetch and send data.
+
+## Getting Started
+
+To get started with our project, follow these steps:
+
+1. Clone the repository to your local machine:
+
+   ```bash
+   git clone https://github.com/your-username/flutter-mobile-app.git
+
