@@ -65,6 +65,8 @@ class GetAllDoctorsSuccessState extends   HomeStates
 
 
 }
+class LogOutSuccess extends HomeStates{}
+class LogOutFailure extends HomeStates{}
 class GetAllDoctorsErrorState extends   HomeStates
 {
 }

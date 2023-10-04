@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:v_care_clinic/core/Colors.dart';
 import 'package:v_care_clinic/core/SharedFunctions.dart';
 import 'package:v_care_clinic/core/fonts.dart';
@@ -54,6 +55,17 @@ print(CacheHelper.getData(key: "token"));
         }
       },
     builder: (context,state) {
+      if (state is SignInLoadingState) {
+        return Container(
+          color: Colors.white,
+          child: Center(
+            child: CircularProgressIndicator(
+              color: HexColor('#174068'),
+
+            ),
+          ),
+        );
+      }
       return Scaffold(
         body: SafeArea(
           child: Container(

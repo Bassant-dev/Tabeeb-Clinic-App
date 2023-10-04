@@ -36,8 +36,8 @@ class UserProfileScreen extends StatelessWidget {
             color: mainColor,
           ),
         ),
-        SizedBox(height: 10.h),
-        buildEditAccountButton(),
+        // SizedBox(height: 10.h),
+        // buildEditAccountButton(),
         SizedBox(height: 20.h),
         Divider(color: mainColor),
         SizedBox(height: 20.h),
@@ -51,29 +51,29 @@ class UserProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget buildEditAccountButton() {
-    return ElevatedButton.icon(
-      onPressed: () {
-
-      },
-      icon: Icon(Icons.edit),
-      label: Text(
-        'Edit account details',
-        style: TextStyle(
-          fontSize: 15,
-          fontWeight: FontWeight.w400,
-        ),
-      ),
-      style: ElevatedButton.styleFrom(
-        primary: mainColor,
-        onPrimary: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(40.0),
-        ),
-        padding: EdgeInsets.symmetric(vertical: 13.h,horizontal: 13.w),
-      ),
-    );
-  }
+  // Widget buildEditAccountButton() {
+  //   return ElevatedButton.icon(
+  //     onPressed: () {
+  //
+  //     },
+  //     icon: Icon(Icons.edit),
+  //     label: Text(
+  //       'Edit account details',
+  //       style: TextStyle(
+  //         fontSize: 15,
+  //         fontWeight: FontWeight.w400,
+  //       ),
+  //     ),
+  //     style: ElevatedButton.styleFrom(
+  //       primary: mainColor,
+  //       onPrimary: Colors.white,
+  //       shape: RoundedRectangleBorder(
+  //         borderRadius: BorderRadius.circular(40.0),
+  //       ),
+  //       padding: EdgeInsets.symmetric(vertical: 13.h,horizontal: 13.w),
+  //     ),
+  //   );
+  // }
 
   Widget buildProfileDetailRow(IconData icon, String text) {
     return Row(

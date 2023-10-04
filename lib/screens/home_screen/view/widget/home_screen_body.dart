@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:v_care_clinic/screens/home_screen/view/widget/view_all_doctors_home.dart';
 
+import '../../../LoginScreen/view/SignInScreen.dart';
 import '../../../ProfileScreen/view/screens/UserProfileScreen.dart';
 import '../../../doctor_details/view model/doctor_details_cubit.dart';
 import '../../../doctor_details/views/doctor details view.dart';
@@ -191,21 +192,82 @@ class HomeScreenBody extends StatelessWidget {
       },
     );
   }
+  showAlertDialog(BuildContext context) {
 
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text("Ok"),
+      onPressed:  () {
+        HomeCubit.get(context).userLogOut();
+      },
+    );
+    Widget continueButton = TextButton(
+      child: Text("Cancel"),
+      onPressed:  () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  HomeScreen()),
+        );
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Logout"),
+      content: Text("Would you like to Logout?!"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if(state is LogOutSuccess){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>   SignInScreen()),
+          );
+          if(state is  GetAllDoctorsLoadingState) {
+           CircularProgressIndicator(color:  HexColor('#174068'),);
+          }
+        }
+      },
       builder: (context, state) {
+        if (state is HomeLoadingState) {
+          return Container(
+            color: Colors.white,
+            child: Center(
+              child: CircularProgressIndicator(
+                color: HexColor('#174068'),
+
+              ),
+            ),
+          );
+        }
+
         var cubit = HomeCubit.get(context);
         return Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             backgroundColor: HexColor('#174068'),
             title: Text('VCare', style: TextStyle(fontSize: 20, color: Colors.white)),
-            leading: IconButton(
-              icon: Icon(Icons.menu, color: Colors.white),
-              onPressed: () {},
-            ),
+           actions: [
+             IconButton(onPressed: (){
+               showAlertDialog(context);
+
+             }, icon: Icon(Icons.logout))
+           ],
           ),
           bottomNavigationBar: BottomAppBar(
             color: Colors.white,
@@ -316,7 +378,8 @@ class HomeScreenBody extends StatelessWidget {
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
-          body: Column(
+          body:
+          Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,

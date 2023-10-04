@@ -51,6 +51,7 @@ dependencies:
   syncfusion_flutter_datepicker: ^23.1.36
   calendar_date_picker2: ^0.5.3
   dots_indicator: ^2.1.1
+  quickalert: ^1.0.2
 
 
 

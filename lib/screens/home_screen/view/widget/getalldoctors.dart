@@ -2,28 +2,46 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+
 import '../../../doctor_details/view model/doctor_details_cubit.dart';
 import '../../../doctor_details/views/doctor details view.dart';
-// Import the DoctorDetailsView
 import '../../view_model/cubit/cubit.dart';
 import '../../view_model/cubit/states.dart';
 
 class GetAllDoctors extends StatelessWidget {
-  GetAllDoctors ({Key? key,}) : super(key: key);
-
+  GetAllDoctors({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+
+      },
       builder: (context, state) {
+        if (state is GetAllDoctorsLoadingState) {
+          return Container(
+            color: Colors.white,
+            child: Center(
+              child: CircularProgressIndicator(
+                color: HexColor('#174068'),
+
+              ),
+            ),
+          );
+        }
         var cubit = HomeCubit.get(context);
         return Scaffold(
           appBar: AppBar(
             title: Text('All Doctors'),
             backgroundColor: HexColor('#174068'),
           ),
-          body: GridView.builder(
+          body:  state is GetAllDoctorsLoadingState
+              ? Center(
+            child: CircularProgressIndicator(
+              color: HexColor('#174068'), // Custom color for CircularProgressIndicator
+            ),
+          )
+              :GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 0.7,
@@ -39,11 +57,11 @@ class GetAllDoctors extends StatelessWidget {
                 return CircularProgressIndicator(); // Display a loading indicator if data is null
               }
               return DoctorCard(
-                doctorName: sectionData!.name!,
+                doctorName: sectionData.name!,
                 specialty: sectionData.degree!,
                 description: sectionData.description!,
                 imageUrl: sectionData.photo!,
-                doctorId:sectionData.id!, // Pass the doctor id to the DoctorCard
+                doctorId: sectionData.id!, // Pass the doctor id to the DoctorCard
               );
             },
           ),

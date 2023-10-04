@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:v_care_clinic/screens/home_screen/model/specialization_model.dart';
 import 'package:v_care_clinic/screens/home_screen/view_model/cubit/states.dart';
 import 'package:v_care_clinic/screens/register_screen/view_model/cubit/states.dart';
@@ -24,6 +25,24 @@ class HomeCubit extends Cubit<HomeStates> {
   static HomeCubit get(context) => BlocProvider.of<HomeCubit>(context);
 
   final Dio dio = Dio();
+  Future userLogOut()async
+  {
+    try {
+      Response response=await DioHelper.postData(url: 'auth/logout',token: CacheHelper.getData(key: "token"), data: {});
+      print(response.data['message']);
+      emit(LogOutSuccess());
+    } on Exception catch (e) {
+      print(e.toString());
+      if(e is DioError && e.response?.statusCode==401){
+        final error = e.response?.data;
+        final m = error["message"];
+        print(error);
+        print(m);
+      }
+      emit(LogOutFailure());
+
+    }
+  }
   CityAboutGovernmentModel? cityAboutGovernmentModel;
   Future<void>getAllCityAboutGovernment(int index)async
   {
@@ -54,7 +73,12 @@ class HomeCubit extends Cubit<HomeStates> {
   GetALLDoctors ? getALLDoctors;
   Future<void>getAllDoctors()async
   {
+
+    CircularProgressIndicator(
+      color: HexColor('#174068'), // Custom color for CircularProgressIndicator
+    );
     emit(GetAllDoctorsLoadingState());
+
 
 
     try {
