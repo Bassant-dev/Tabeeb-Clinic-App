@@ -6,10 +6,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:v_care_clinic/core/Colors.dart';
 
 import 'package:v_care_clinic/screens/ProfileScreen/viewmodel/UserProfileCubit/UserProfileCubit.dart';
-<<<<<<< Updated upstream
-=======
 import 'package:v_care_clinic/screens/ProfileScreen/viewmodel/UserProfileCubit/UserProfileStates.dart';
->>>>>>> Stashed changes
 import 'package:v_care_clinic/screens/edit_profile_screen/view/widgets/edit_profile_screen.dart';
 
 
